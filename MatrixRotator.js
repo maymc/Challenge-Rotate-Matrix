@@ -23,41 +23,54 @@ module.exports = class MatrixRotator {
     console.log("direction: " + direction)
     // console.log("matrix row: " + this.matrix[0]);
     // console.log("element in matrix at this position: " + this.matrix[0][0]);
+    console.log("matrixLength: " + this.matrix.length);
+    let rotatedMatrixCW = [];   //array to store all new rotated rows
+    let rotatedRow = [];      //array to store rotated elements
 
-    let matrixLength = this.matrix.length;
-    console.log("matrixLength: " + matrixLength);
-    let matrixRows = matrixLength - 1;
-    console.log("matrixRows: " + matrixRows);
-    let rotatedMatrixCW = [];
-    let rotatedRow = [];
-
+    //If the direction is clockwise
     if(direction === "ClockWise"){
-      for(let j=matrixRows; j>=0; j--){
-        for(let i=matrixRows; i>=0; i--){
+
+      //Starting from the first column, create new rows of rotated elements and then move to the next column to the right
+      for(let j=this.matrix.length - 1; j>=0; j--){
+        //From each row, starting from the last row, take the first element and push it into the new row array
+        for(let i=this.matrix.length - 1; i>=0; i--){
           let shiftedRowElem = this.matrix[i].shift();
-          console.log("shiftedRowElem: " + shiftedRowElem);
+          // console.log("shiftedRowElem: " + shiftedRowElem);
+
           rotatedRow.push(shiftedRowElem);
           console.log(rotatedRow);
         }
+        //Add this row to the new rotated matrix array
         rotatedMatrixCW.push(rotatedRow);
         console.log(rotatedMatrixCW);
-        rotatedRow = []; //reset the row 
+
+        rotatedRow = [];    //reset the row array for the next row
       }
+
+      //Set the object's matrix property with a new rotated matrix
       this.matrix = rotatedMatrixCW;
       console.log("done with clockwise");
     }
+    //Else is the direction is Counter Clockwise
     else if(direction === "CounterClockWise"){
-      for(let j=0; j<matrixLength; j++){
-        for(let i=0; i<=matrixRows; i++){
+
+      //From each row, starting from the first row, pop the last element and push it into the new row array
+      for(let j=0; j<this.matrix.length; j++){
+        for(let i=0; i<=this.matrix.length - 1; i++){
           let poppedRowElem = this.matrix[i].pop();
-          console.log("poppedRowElem: " + poppedRowElem);
+          // console.log("poppedRowElem: " + poppedRowElem);
+
           rotatedRow.push(poppedRowElem);
           console.log(rotatedRow);
         }
+        //Add this new rotated row to the new rotated matrix array
         rotatedMatrixCW.push(rotatedRow);
         console.log(rotatedMatrixCW);
-        rotatedRow = []; //reset the row 
+
+        rotatedRow = [];    //reset the row for the next row
       }
+      
+      //Set the object's matrix property with a new rotated matrix
       this.matrix = rotatedMatrixCW;
       console.log("done with counterclockwise");
     }
