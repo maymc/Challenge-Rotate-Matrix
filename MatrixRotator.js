@@ -34,22 +34,22 @@ module.exports = class MatrixRotator {
       for(let j=this.matrix.length - 1; j>=0; j--){
         //From each row, starting from the last row, take the first element and push it into the new row array
         for(let i=this.matrix.length - 1; i>=0; i--){
-          let shiftedRowElem = this.matrix[i].shift();
+          // let shiftedRowElem = this.matrix[i].shift();
           // console.log("shiftedRowElem: " + shiftedRowElem);
 
-          rotatedRow.push(shiftedRowElem);
-          console.log(rotatedRow);
+          rotatedRow.push(this.matrix[i].shift());
+          // console.log(rotatedRow);
         }
         //Add this row to the new rotated matrix array
         rotatedMatrixCW.push(rotatedRow);
-        console.log(rotatedMatrixCW);
 
         rotatedRow = [];    //reset the row array for the next row
       }
 
       //Set the object's matrix property with a new rotated matrix
+      console.log(rotatedMatrixCW);
       this.matrix = rotatedMatrixCW;
-      console.log("done with clockwise");
+      // console.log("done with clockwise");
     }
     //Else is the direction is Counter Clockwise
     else if(direction === "CounterClockWise"){
@@ -57,22 +57,22 @@ module.exports = class MatrixRotator {
       //From each row, starting from the first row, pop the last element and push it into the new row array
       for(let j=0; j<this.matrix.length; j++){
         for(let i=0; i<=this.matrix.length - 1; i++){
-          let poppedRowElem = this.matrix[i].pop();
+          // let poppedRowElem = this.matrix[i].pop();
           // console.log("poppedRowElem: " + poppedRowElem);
 
-          rotatedRow.push(poppedRowElem);
-          console.log(rotatedRow);
+          rotatedRow.push(this.matrix[i].pop());
+          // console.log(rotatedRow);
         }
         //Add this new rotated row to the new rotated matrix array
         rotatedMatrixCW.push(rotatedRow);
-        console.log(rotatedMatrixCW);
-
+        
         rotatedRow = [];    //reset the row for the next row
       }
-      
+
       //Set the object's matrix property with a new rotated matrix
+      console.log(rotatedMatrixCW);
       this.matrix = rotatedMatrixCW;
-      console.log("done with counterclockwise");
+      // console.log("done with counterclockwise");
     }
 
     // must be a valid Direction, see Direction.js
